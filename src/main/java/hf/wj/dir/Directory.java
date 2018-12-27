@@ -141,12 +141,9 @@ public class Directory {
 					String fsExt = null;
 					if (fileName.contains(".")) {
 						fsExt = fileName.substring(fileName.lastIndexOf(".") + 1);
-						fsExt = String.format("(%.4s)", fsExt.toLowerCase());
 						String fileNameNoExt = fileName.substring(0, fileName.lastIndexOf("."));
-						String fullName = String.format("%s%.12s", fsExt, fileNameNoExt);
-						if (fileNameNoExt.length() > 15)
-							fullName = String.format("%s%.12s...", fsExt, fileNameNoExt);
-						jo.put("text", fullName);
+						String fullName = String.format("[%-3.3s] %s", fsExt.toLowerCase(), fileNameNoExt);
+						jo.put("text", fullName.replace(" ", "&nbsp;"));
 					} else {
 						jo.put("text", fileName);
 					}
