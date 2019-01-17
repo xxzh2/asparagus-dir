@@ -16,9 +16,13 @@ public class DirectoryApplication {
 			path = args[0];
 		}
 
+		if (args != null && args.length > 1) {
+			base = args[1];
+		}
+
 		if (path == null)
 			path = DEFAULT_PATH;
-		LOG.info(path);
+		LOG.info("base path: " + path);
 		Directory dir = new Directory(base);
 		dir.setShowExtend(true);
 		dir.gen(new String[] { path });

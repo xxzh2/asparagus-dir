@@ -9,9 +9,15 @@ public class DirectoryTest {
 
 //	@Test
 	public void test() {
-		Directory dir = new Directory("C:\\Users\\leovo\\Desktop\\tmp");
-		JSONArray ja = dir.gen(new String[] { "C:\\Users\\leovo\\Desktop\\tmp" });
+		Directory dir = new Directory("C:\\Users");
+		JSONArray ja = dir.gen(new String[] { "C:\\Users" });
 		System.out.println(ja);
+	}
+
+	@Test
+	public void encodePath() {
+		String dir = Directory.encodePath("\\Bing-wallpaper\\Number2_ZH-CN12009255937_1920x1080.jpg");
+		System.out.println(dir);
 	}
 
 	@Test

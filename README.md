@@ -12,3 +12,4 @@ mvn assembly:assembly
 
 ##### 1.0.6
 + fix path to URL encode
++ add usage -jar <target> <base dir> [new] 

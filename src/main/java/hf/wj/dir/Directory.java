@@ -5,7 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -157,18 +158,36 @@ public class Directory {
 					}
 					jo.put("icon", "jstree-leaf");
 					if (this.baseDir != null) {
-						String _base = this.baseDir.replace("\\", "/");
-						jo.put("a_attr", "{\"href\":'"
-								+ URLEncoder.encode(fs.getPath().replace("\\", "/").replace(_base, "."), "utf-8")
-								+ "'}");
+						String _base = toPath(this.baseDir);
+						jo.put("a_attr", "{\"href\":'" + encodePath(toPath(fs.getPath())).replace(_base, "") + "'}");
+						jo.put("attr", "{\"href\":'" + toPath(fs.getPath()).replace(_base, "") + "'}");
 					} else {
-						jo.put("a_attr",
-								"{\"href\":'" + URLEncoder.encode(fs.getPath().replace("\\", "/"), "utf-8") + "'}");
+						jo.put("a_attr", "{\"href\":'" + encodePath(toPath(fs.getPath())) + "'}");
+						jo.put("attr", "{\"href\":'" + toPath(fs.getPath()) + "'}");
 					}
+
 				}
 				ja.add(jo);
 			}
 		}
 		return ja;
+	}
+
+	public static String encodePath(String path) {
+		String upath = null;
+		try {
+			URI u = new URI(null, null, path);
+			upath = u.toASCIIString().replaceAll("\\+", "%20");
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+//		System.out.println(toPath(baseDir));
+//		System.out.println(upath);
+		return upath.replace("#", "");
+	}
+
+	private static String toPath(String path) {
+		return path == null ? null : path.replace("\\", "/");
 	}
 }
