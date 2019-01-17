@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,13 +68,18 @@ public class Directory {
 	 *
 	 * @param args String[]
 	 * @return jsonArray JSONArray
+	 * @throws UnsupportedEncodingException
 	 */
 	public JSONArray gen(String[] args) {
 		String path = ".";
 		if (args != null && args.length > 0) {
 			path = args[0];
 		}
-		this.fja = this.traversal(path, false);
+		try {
+			this.fja = this.traversal(path, false);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return this.fja;
 	}
 
@@ -110,8 +117,9 @@ public class Directory {
 	 *
 	 * @param path String
 	 * @return jsonArray JSONArray
+	 * @throws UnsupportedEncodingException
 	 */
-	protected JSONArray traversal(String path, boolean state) {
+	protected JSONArray traversal(String path, boolean state) throws UnsupportedEncodingException {
 		File f = new File(path);
 		if (path == null || f.exists() == false || f.isDirectory() == false) {
 			System.out.println(path + " not exist.");
@@ -150,9 +158,12 @@ public class Directory {
 					jo.put("icon", "jstree-leaf");
 					if (this.baseDir != null) {
 						String _base = this.baseDir.replace("\\", "/");
-						jo.put("a_attr", "{\"href\":'" + fs.getPath().replace("\\", "/").replace(_base, ".") + "'}");
+						jo.put("a_attr", "{\"href\":'"
+								+ URLEncoder.encode(fs.getPath().replace("\\", "/").replace(_base, "."), "utf-8")
+								+ "'}");
 					} else {
-						jo.put("a_attr", "{\"href\":'" + fs.getPath().replace("\\", "/") + "'}");
+						jo.put("a_attr",
+								"{\"href\":'" + URLEncoder.encode(fs.getPath().replace("\\", "/"), "utf-8") + "'}");
 					}
 				}
 				ja.add(jo);
