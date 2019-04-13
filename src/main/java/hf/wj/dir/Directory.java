@@ -159,11 +159,15 @@ public class Directory {
 					jo.put("icon", "jstree-leaf");
 					if (this.baseDir != null) {
 						String _base = toPath(this.baseDir);
-						jo.put("a_attr", "{\"href\":'" + encodePath(toPath(fs.getPath())).replace(_base, "") + "'}");
-						jo.put("attr", "{\"href\":'" + toPath(fs.getPath()).replace(_base, "") + "'}");
+						new JSONObject();
+						jo.put("a_attr", JSONObject.fromObject(
+								"{\"href\":\"" + encodePath(toPath(fs.getPath())).replace(_base, "") + "\"}"));
+						jo.put("attr", JSONObject
+								.fromObject("{\"href\":\"" + toPath(fs.getPath()).replace(_base, "") + "\"}"));
 					} else {
-						jo.put("a_attr", "{\"href\":'" + encodePath(toPath(fs.getPath())) + "'}");
-						jo.put("attr", "{\"href\":'" + toPath(fs.getPath()) + "'}");
+						jo.put("a_attr",
+								JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())) + "\"}"));
+						jo.put("attr", JSONObject.fromObject("{\"href\":\"" + toPath(fs.getPath()) + "\"}"));
 					}
 
 				}

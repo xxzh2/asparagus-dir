@@ -1,3 +1,6 @@
+## Description
+Directory JSON tree generator.
+
 ## Usage 
 [maven usage](http://maven.apache.org/plugins/maven-assembly-plugin/usage.html)
 
