@@ -22,13 +22,15 @@ import net.sf.json.JSONObject;
  */
 public class Directory {
 	/**
-	 * log
+	 * The class log instance.
 	 */
 	static final Log LOG = LogFactory.getLog(Directory.class);
+
 	/**
 	 * Internal Variable JSON object.
 	 */
 	private JSONArray fja = null;
+
 	/**
 	 * Base directory.
 	 */
@@ -43,7 +45,6 @@ public class Directory {
 	 * Default Constructor.
 	 */
 	public Directory() {
-
 	}
 
 	/**
@@ -160,16 +161,12 @@ public class Directory {
 					if (this.baseDir != null) {
 						String _base = toPath(this.baseDir);
 						new JSONObject();
-						jo.put("a_attr", JSONObject.fromObject(
-								"{\"href\":\"" + encodePath(toPath(fs.getPath())).replace(_base, "") + "\"}"));
-						jo.put("attr", JSONObject
-								.fromObject("{\"href\":\"" + toPath(fs.getPath()).replace(_base, "") + "\"}"));
+						jo.put("a_attr", JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())).replace(_base, "") + "\"}"));
+						jo.put("attr", JSONObject.fromObject("{\"href\":\"" + toPath(fs.getPath()).replace(_base, "") + "\"}"));
 					} else {
-						jo.put("a_attr",
-								JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())) + "\"}"));
+						jo.put("a_attr", JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())) + "\"}"));
 						jo.put("attr", JSONObject.fromObject("{\"href\":\"" + toPath(fs.getPath()) + "\"}"));
 					}
-
 				}
 				ja.add(jo);
 			}
@@ -177,6 +174,9 @@ public class Directory {
 		return ja;
 	}
 
+	/**
+	 * 特殊字符+ 转url encode
+	 */
 	public static String encodePath(String path) {
 		String upath = null;
 		try {
@@ -185,12 +185,12 @@ public class Directory {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-
-//		System.out.println(toPath(baseDir));
-//		System.out.println(upath);
 		return upath.replace("#", "");
 	}
 
+	/**
+	 * 路径转换: Windows 路径转Uri
+	 */
 	private static String toPath(String path) {
 		return path == null ? null : path.replace("\\", "/");
 	}

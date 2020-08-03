@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>asparagus</groupId>
 	<artifactId>dir</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 
 	<dependencies>
 		<dependency>
@@ -82,11 +82,11 @@
 	<distributionManagement>
 	   <repository>
 	     <id>archiva.internal</id>
-	     <url>http://192.168.1.95:8080/repository/internal/</url>
+	     <url>http://repo.ginkgo.com:8080/repository/internal/</url>
 	   </repository>
 	   <snapshotRepository>
 	     <id>archiva.snapshots</id>
-	     <url>http://192.168.1.95:8080/repository/snapshots/</url>
+	     <url>http://repo.ginkgo.com:8080/repository/snapshots/</url>
 	   </snapshotRepository>
    </distributionManagement>
 </project>
