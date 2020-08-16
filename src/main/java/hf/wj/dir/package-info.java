@@ -1,7 +1,4 @@
 /**
- *
- */
-/**
  * Directory Utilites.
  * @author Asparagus
  *

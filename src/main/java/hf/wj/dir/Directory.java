@@ -17,7 +17,7 @@ import net.sf.json.JSONObject;
  * JSONfy Directory file list.
  *
  * @author Asparagus
- *
+ * @version $Id: $Id
  */
 public class Directory {
 	/**
@@ -176,8 +176,8 @@ public class Directory {
 
 	/**
 	 * 特殊字符+ 转url encode
-	 * 
-	 * @param path
+	 *
+	 * @param path String uri
 	 * @return encoded path
 	 */
 	public static String encodePath(String path) {
