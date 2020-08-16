@@ -78,6 +78,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<source>6</source>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
