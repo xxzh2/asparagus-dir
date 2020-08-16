@@ -96,6 +96,22 @@
 		</plugins>
 	</reporting>
 
+	<repositories>
+		<repository>
+			<id>central</id>
+			<!-- <url>https://repo.maven.apache.org/maven2</url> -->
+			<url>http://repo.tydic.hf/repository/internal/</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<!-- <url>https://repo.maven.apache.org/maven2</url> -->
+			<url>http://repo.tydic.hf/repository/internal/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<distributionManagement>
 		<repository>
 			<id>archiva.internal</id>
