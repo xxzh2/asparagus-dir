@@ -5,10 +5,21 @@ import java.io.File;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * <p>DirectoryApplication class.</p>
+ *
+ * @author Think
+ * @version $Id: $Id
+ */
 public class DirectoryApplication {
 	static final Log LOG = LogFactory.getLog(DirectoryApplication.class);
 	static final String DEFAULT_PATH = System.getProperty("user.home") + File.separator + "Documents";
 
+	/**
+	 * <p>main.</p>
+	 *
+	 * @param args an array of {@link java.lang.String} objects.
+	 */
 	public static void main(String[] args) {
 		String path = null;
 		String base = new File(".").getAbsolutePath();
