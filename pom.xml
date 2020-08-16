@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>asparagus</groupId>
 	<artifactId>dir</artifactId>
-	<version>1.0.7</version>
+	<version>1.0.7-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>
@@ -14,10 +13,10 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
-		    <scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -42,17 +41,34 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.17</version>
-				<!-- 
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>checkstyle</report>
-						</reports>
-					</reportSet>
-				</reportSets> -->
+				<!-- <reportSets> <reportSet> <reports> <report>checkstyle</report> </reports> </reportSet> </reportSets> -->
 				<configuration>
 					<configLocation>src/main/resources/checkstyle-checker.xml</configLocation>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -64,14 +80,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.17</version>
-				<!-- 
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>checkstyle</report>
-						</reports>
-					</reportSet>
-				</reportSets> -->
+				<!-- <reportSets> <reportSet> <reports> <report>checkstyle</report> </reports> </reportSet> </reportSets> -->
 				<configuration>
 					<configLocation>src/main/resources/checkstyle-checker.xml</configLocation>
 				</configuration>
@@ -80,13 +89,13 @@
 	</reporting>
 
 	<distributionManagement>
-	   <repository>
-	     <id>archiva.internal</id>
-	     <url>http://repo.ginkgo.com:8080/repository/internal/</url>
-	   </repository>
-	   <snapshotRepository>
-	     <id>archiva.snapshots</id>
-	     <url>http://repo.ginkgo.com:8080/repository/snapshots/</url>
-	   </snapshotRepository>
-   </distributionManagement>
+		<repository>
+			<id>archiva.internal</id>
+			<url>http://repo.tydic.hf/repository/internal/</url>
+		</repository>
+		<snapshotRepository>
+			<id>archiva.snapshots</id>
+			<url>http://repo.tydic.hf/repository/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>

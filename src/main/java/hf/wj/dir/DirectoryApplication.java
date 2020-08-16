@@ -1,6 +1,7 @@
 package hf.wj.dir;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,7 +26,11 @@ public class DirectoryApplication {
 		LOG.info("base path: " + path);
 		Directory dir = new Directory(base);
 		dir.setShowExtend(true);
-		dir.gen(new String[] { path });
+		try {
+			dir.gen(new String[] { path });
+		} catch (UnsupportedEncodingException e) {
+			LOG.error(e);
+		}
 		dir.write(".");
 	}
 

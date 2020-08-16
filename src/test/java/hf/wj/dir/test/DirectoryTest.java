@@ -1,5 +1,7 @@
 package hf.wj.dir.test;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Test;
 
 import hf.wj.dir.Directory;
@@ -8,7 +10,7 @@ import net.sf.json.JSONArray;
 public class DirectoryTest {
 
 //	@Test
-	public void test() {
+	public void test() throws UnsupportedEncodingException {
 		Directory dir = new Directory("C:\\Users");
 		JSONArray ja = dir.gen(new String[] { "C:\\Users" });
 		System.out.println(ja);

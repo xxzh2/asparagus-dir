@@ -72,16 +72,12 @@ public class Directory {
 	 * @return jsonArray JSONArray
 	 * @throws UnsupportedEncodingException
 	 */
-	public JSONArray gen(String[] args) {
+	public JSONArray gen(String[] args) throws UnsupportedEncodingException {
 		String path = ".";
 		if (args != null && args.length > 0) {
 			path = args[0];
 		}
-		try {
-			this.fja = this.traversal(path, false);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		this.fja = this.traversal(path, false);
 		return this.fja;
 	}
 
@@ -122,14 +118,17 @@ public class Directory {
 	 * @throws UnsupportedEncodingException
 	 */
 	protected JSONArray traversal(String path, boolean state) throws UnsupportedEncodingException {
-		File f = new File(path);
-		if (path == null || f.exists() == false || f.isDirectory() == false) {
-			System.out.println(path + " not exist.");
-			return null;
-		}
 		JSONArray ja = new JSONArray();
-		if (f.listFiles() != null) {
-			for (File fs : f.listFiles()) {
+		if (path == null)
+			return ja;
+		File f = new File(path);
+		if (f == null || f.exists() == false || f.isDirectory() == false) {
+			System.out.println(path + " not exist.");
+			return ja;
+		}
+		File[] files = f.listFiles();
+		if (files != null) {
+			for (File fs : files) {
 				JSONObject jo = new JSONObject();
 				if (fs.isHidden()) {
 					continue;
@@ -161,10 +160,13 @@ public class Directory {
 					if (this.baseDir != null) {
 						String _base = toPath(this.baseDir);
 						new JSONObject();
-						jo.put("a_attr", JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())).replace(_base, "") + "\"}"));
-						jo.put("attr", JSONObject.fromObject("{\"href\":\"" + toPath(fs.getPath()).replace(_base, "") + "\"}"));
+						jo.put("a_attr", JSONObject.fromObject(
+								"{\"href\":\"" + encodePath(toPath(fs.getPath())).replace(_base, "") + "\"}"));
+						jo.put("attr", JSONObject
+								.fromObject("{\"href\":\"" + toPath(fs.getPath()).replace(_base, "") + "\"}"));
 					} else {
-						jo.put("a_attr", JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())) + "\"}"));
+						jo.put("a_attr",
+								JSONObject.fromObject("{\"href\":\"" + encodePath(toPath(fs.getPath())) + "\"}"));
 						jo.put("attr", JSONObject.fromObject("{\"href\":\"" + toPath(fs.getPath()) + "\"}"));
 					}
 				}
@@ -176,16 +178,19 @@ public class Directory {
 
 	/**
 	 * 特殊字符+ 转url encode
+	 * 
+	 * @return
 	 */
 	public static String encodePath(String path) {
 		String upath = null;
 		try {
 			URI u = new URI(null, null, path);
 			upath = u.toASCIIString().replaceAll("\\+", "%20");
+			return upath.replace("#", "");
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
-		return upath.replace("#", "");
+		return null;
 	}
 
 	/**
