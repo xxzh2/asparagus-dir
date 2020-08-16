@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -70,9 +69,8 @@ public class Directory {
 	 *
 	 * @param args String[]
 	 * @return jsonArray JSONArray
-	 * @throws UnsupportedEncodingException
 	 */
-	public JSONArray gen(String[] args) throws UnsupportedEncodingException {
+	public JSONArray gen(String[] args) {
 		String path = ".";
 		if (args != null && args.length > 0) {
 			path = args[0];
@@ -113,11 +111,11 @@ public class Directory {
 	/**
 	 * Generate sub directory.
 	 *
-	 * @param path String
+	 * @param path  String
+	 * @param state boolean
 	 * @return jsonArray JSONArray
-	 * @throws UnsupportedEncodingException
 	 */
-	protected JSONArray traversal(String path, boolean state) throws UnsupportedEncodingException {
+	protected JSONArray traversal(String path, boolean state) {
 		JSONArray ja = new JSONArray();
 		if (path == null)
 			return ja;
@@ -179,7 +177,8 @@ public class Directory {
 	/**
 	 * 特殊字符+ 转url encode
 	 * 
-	 * @return
+	 * @param path
+	 * @return encoded path
 	 */
 	public static String encodePath(String path) {
 		String upath = null;
