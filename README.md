@@ -10,6 +10,8 @@ mvn package
 mvn source:jar
 # jar with dependency
 mvn assembly:assembly
+# sonarqube analysis
+compile sonar:sonar deploy -DskipTests -Dsonar.host.url=http://192.1.15.15:9000  -Dsonar.java.binaries=target
 ```
 ## Change Log
 
